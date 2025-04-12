@@ -1,79 +1,90 @@
-import { useDispatch } from "react-redux";
-import { addItem } from "../cartSlice.js";
-import { LiaRupeeSignSolid } from "react-icons/lia";
-import { useSelector } from "react-redux";
-import { Items } from "../Helper/Items.js";
+import { useAppDispatch, useAppSelector } from "../Helper/types";
+import { addItem } from "../cartSlice";
+import type { ProductDetails } from "../Helper/types";
+import { useState } from "react";
+import { IoMdAdd } from "react-icons/io";
+import { IoMdRemove } from "react-icons/io";
+import { IoMdCart } from "react-icons/io";
 
-function Product() {
-  const dispatch = useDispatch();
+const ProductList = () => {
+  const dispatch = useAppDispatch();
+  const filteredProduct = useAppSelector((state) => state.product.filteredItems);
+  const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
 
-  const filteredProduct = useSelector((store) => store.product.filteredItems);
+  const handleAddItem = (item: ProductDetails) => {
+    const productWithImage: ProductDetails = {
+      ...item,
+      image: item.image || "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
+    };
+    dispatch(addItem(productWithImage));
+  };
 
-  const filtereItemDisplayed = useSelector(
-    (store) => store.product.filteredItemsDisplayed
-  );
-
-  function handleAddItem(singleProduct) {
-    const { id, name, category, mrp, sellingPrice, image, quantity } =
-      singleProduct;
-    dispatch(
-      addItem({ id, name, category, mrp, sellingPrice, image, quantity })
-    );
-  }
-
-  function AllProducts() {
-    return (
-      <>
-        {Items.map(function (singleProduct) {
-          return (
-            <div key={singleProduct.id} className="w-full sm:w-[350px] md:w-[400px] border hover:shadow-2xl transition-shadow flex flex-col justify-center items-center p-4 sm:p-8">
-              <p className="font-medium text-sm sm:text-base text-center">{singleProduct.name}</p>
-              <h1 className="font-bold mt-2 sm:mt-4 flex items-center">
-                <LiaRupeeSignSolid />
-                {singleProduct.mrp}
-              </h1>
-              <span className="mt-2 sm:mt-4"></span>
-              <img className="h-40 sm:h-60 mt-3 sm:mt-5 object-contain" src={singleProduct.image} alt={singleProduct.name} />
-              <button
-                onClick={() => handleAddItem(singleProduct)}
-                className="p-1 bg-[#99c46b] text-black mt-4 sm:mt-7 rounded-md text-sm sm:text-base"
-              >
-                Add to Basket
-              </button>
-            </div>
-          );
-        })}
-      </>
-    );
-  }
+  const handleQuantityChange = (itemId: number, newQuantity: number) => {
+    setQuantities((prev) => ({
+      ...prev,
+      [itemId]: newQuantity,
+    }));
+  };
 
   return (
-    <>
-      {filtereItemDisplayed ? (
-        filteredProduct.map(function (singleProduct) {
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+        {filteredProduct.map((singleProduct) => {
+          const currentQuantity = quantities[singleProduct.id] || 1;
           return (
-            <div key={singleProduct.id} className="w-full sm:w-[350px] md:w-[400px] border hover:shadow-2xl transition-shadow flex flex-col justify-center items-center p-4 sm:p-8">
-              <p className="font-medium text-sm sm:text-base text-center">{singleProduct.name}</p>
-              <h1 className="font-bold mt-2 sm:mt-4 flex items-center">
-                <LiaRupeeSignSolid />
-                {singleProduct.mrp}
-              </h1>
-              <span className="mt-2 sm:mt-4"></span>
-              <img className="h-40 sm:h-60 mt-3 sm:mt-5 object-contain" src={singleProduct.image} alt={singleProduct.name} />
-              <button
-                onClick={() => handleAddItem(singleProduct)}
-                className="p-1 bg-[#99c46b] text-black mt-4 sm:mt-7 rounded-md text-sm sm:text-base"
+              <div
+                  key={singleProduct.id}
+                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
               >
-                Add to Basket
-              </button>
-            </div>
+                <div className="p-4">
+                  <img
+                      src={singleProduct.image}
+                      alt={singleProduct.name}
+                      className="w-full h-48 object-contain mb-4"
+                  />
+                  <h3 className="text-lg font-semibold mb-2">{singleProduct.name}</h3>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-gray-600">MRP: ₹{singleProduct.mrp}</span>
+                    <span className="text-green-600 font-semibold">
+                  ₹{singleProduct.sellingPrice}
+                </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <button
+                          onClick={() =>
+                              handleQuantityChange(
+                                  singleProduct.id,
+                                  Math.max(1, currentQuantity - 1)
+                              )
+                          }
+                          className="p-1 rounded-full bg-gray-100 hover:bg-gray-200"
+                      >
+                        <IoMdRemove />
+                      </button>
+                      <span className="w-8 text-center">{currentQuantity}</span>
+                      <button
+                          onClick={() =>
+                              handleQuantityChange(singleProduct.id, currentQuantity + 1)
+                          }
+                          className="p-1 rounded-full bg-gray-100 hover:bg-gray-200"
+                      >
+                        <IoMdAdd />
+                      </button>
+                    </div>
+                    <button
+                        onClick={() => handleAddItem(singleProduct)}
+                        className="flex items-center space-x-1 bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition-colors"
+                    >
+                      <IoMdCart />
+                      <span>Add</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
           );
-        })
-      ) : (
-        <AllProducts />
-      )}
-    </>
+        })}
+      </div>
   );
-}
+};
 
-export default Product;
+export default ProductList;

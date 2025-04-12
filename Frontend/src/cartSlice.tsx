@@ -4,7 +4,7 @@ import { Action, ProductDetails, State } from "./Helper/types";
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    items: [],
+    items: [] as ProductDetails[],
   },
   reducers: {
     addItem: function (state: State, action: PayloadAction<ProductDetails>) {
@@ -17,13 +17,11 @@ const cartSlice = createSlice({
     },
     removeItem: function (state: State, action: Action) {
       state.items = state.items.filter(
-        (item) => item.id !== action.payload // Ensure the correct item is removed
+          (item) => item.id !== action.payload
       );
     },
     increaseItemQuantity: function (state: State, action: Action) {
       const item = state.items.find((item) => item.id === action.payload);
-      console.log(state.items);
-
       if (item) {
         item.quantity++;
       }

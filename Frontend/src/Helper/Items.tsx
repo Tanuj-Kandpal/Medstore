@@ -1,4 +1,6 @@
-export const Items = [
+import { ProductDetails } from "./types";
+
+export const Items: ProductDetails[] = [
   {
     id: 1,
     name: "Himalaya Baby Wipes",
@@ -23,8 +25,7 @@ export const Items = [
     category: "Baby Care",
     mrp: 68,
     sellingPrice: 46,
-    image:
-      "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
+    image: "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
     quantity: 1,
   },
   {
@@ -33,6 +34,7 @@ export const Items = [
     category: "Baby Care",
     mrp: 120,
     sellingPrice: 81,
+    image: "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
     quantity: 1,
   },
   {
@@ -41,6 +43,7 @@ export const Items = [
     category: "Baby Care",
     mrp: 60,
     sellingPrice: 40,
+    image: "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
     quantity: 1,
   },
   {
@@ -49,6 +52,7 @@ export const Items = [
     category: "Skin Care",
     mrp: 20,
     sellingPrice: 16,
+    image: "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
     quantity: 1,
   },
   {
@@ -57,6 +61,7 @@ export const Items = [
     category: "Hair Care",
     mrp: 175,
     sellingPrice: 131,
+    image: "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
     quantity: 1,
   },
   {
@@ -65,6 +70,7 @@ export const Items = [
     category: "Skin Care",
     mrp: 10,
     sellingPrice: 7.5,
+    image: "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
     quantity: 1,
   },
   {
@@ -73,6 +79,7 @@ export const Items = [
     category: "Skin Care",
     mrp: 85,
     sellingPrice: 60,
+    image: "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
     quantity: 1,
   },
   {
@@ -81,6 +88,7 @@ export const Items = [
     category: "Skin Care",
     mrp: 80,
     sellingPrice: 65,
+    image: "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
     quantity: 1,
   },
   {
@@ -89,6 +97,7 @@ export const Items = [
     category: "Skin Care",
     mrp: 90,
     sellingPrice: 74,
+    image: "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
     quantity: 1,
   },
   {
@@ -97,6 +106,7 @@ export const Items = [
     category: "Skin Care",
     mrp: 95,
     sellingPrice: 78,
+    image: "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
     quantity: 1,
   },
   {
@@ -105,30 +115,34 @@ export const Items = [
     category: "Skin Care",
     mrp: 270,
     sellingPrice: 189,
+    image: "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
     quantity: 1,
   },
   {
     id: 14,
     name: "Himalaya Baby Hair Oil",
     category: "Baby Care",
-    mrp: null,
-    sellingPrice: null,
+    mrp: 120,
+    sellingPrice: 85,
+    image: "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
     quantity: 1,
   },
   {
     id: 15,
     name: "Himalaya Sparkling White Toothpaste",
     category: "Oral Care",
-    mrp: null,
-    sellingPrice: null,
+    mrp: 75,
+    sellingPrice: 55,
+    image: "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
     quantity: 1,
   },
   {
     id: 16,
     name: "Himalaya Complete Strong Toothpaste",
     category: "Oral Care",
-    mrp: null,
-    sellingPrice: null,
+    mrp: 75,
+    sellingPrice: 55,
+    image: "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
     quantity: 1,
   },
   {
@@ -137,6 +151,7 @@ export const Items = [
     category: "Skin Care",
     mrp: 109,
     sellingPrice: 55,
+    image: "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
     quantity: 1,
   },
   {
@@ -145,6 +160,7 @@ export const Items = [
     category: "Skin Care",
     mrp: 125,
     sellingPrice: 63,
+    image: "https://m.media-amazon.com/images/I/61YFLf-Z0cL._AC_UL480_FMwebp_QL65_.jpg",
     quantity: 1,
-  },
+  }
 ];

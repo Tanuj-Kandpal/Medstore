@@ -1,21 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Items } from "../Helper/Items";
-
-// ✅ Define the type of a product item
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  mrp: number | null; // ✅ Allow null values
-  sellingPrice: number | null; // ✅ Allow null values
-  quantity?: number;
-  image?: string;
-}
+import { ProductDetails } from "../Helper/types";
 
 // ✅ Define the type of the initial state
 interface ProductState {
-  items: Product[];
-  filteredItems: Product[];
+  items: ProductDetails[];
+  filteredItems: ProductDetails[];
   filteredItemsDisplayed: boolean;
 }
 
@@ -41,5 +31,5 @@ const ProductSlice = createSlice({
   },
 });
 
-export const { filteredItem,isFilteredClicked } = ProductSlice.actions;
+export const { filteredItem, isFilteredClicked } = ProductSlice.actions;
 export default ProductSlice.reducer;

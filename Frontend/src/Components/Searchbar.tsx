@@ -1,24 +1,27 @@
 import { useState } from "react";
-import { IoMdSearch } from "react-icons/io";
+import { useDispatch } from "react-redux";
+import { filteredItem, isFilteredClicked } from "../Slices/ProductSlice";
+
 function Searchbar() {
-  const [text, setText] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const dispatch = useDispatch();
+
+  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
+    setSearchText(e.target.value);
+    dispatch(filteredItem(e.target.value.toLowerCase()));
+    dispatch(isFilteredClicked());
+  }
 
   return (
-    <>
-      <>
-        <div className="flex items-center rounded-lg flex-wrap bg-white overflow-hidden w-80">
-          <input
-            className="flex-grow text-sm text-gray-700 outline-none"
+      <div className="relative">
+        <input
             type="text"
-            placeholder="Search Health Item"
-            onChange={(e) => setText(e.target.value)}
-          />
-          <button className="flex items-center justify-center h-16 p-5 bg-[#73A14E] cursor-pointer">
-            <IoMdSearch className="fill-white text-lg" />
-          </button>
-        </div>
-      </>
-    </>
+            placeholder="Search products..."
+            value={searchText}
+            onChange={handleSearch}
+            className="w-full sm:w-64 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#458400] focus:border-transparent"
+        />
+      </div>
   );
 }
 
